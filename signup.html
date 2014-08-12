@@ -1,0 +1,37 @@
+<html>
+	
+	
+
+	<body>
+		Sign up page
+		<div ng-app="myapp">
+			<div ng-controller="mycontroller">
+				<form>
+					Username<input type="text" ng-model="username"></input>
+					Password<input type="text" ng-model="password"></input>
+					<input type="Submit" ng-click="validateCredentials()" ></input>
+				</form>
+				<span ng-bind="username"></span>
+				<span ng-bind="password"></span>
+			</div>
+		</div>
+		<a href="index.html">Go to Log in page</a>
+	</body>
+	<script src="angular.min.js" > </script>
+	<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+	<script>
+		var myDataRef = new Firebase("https://logintodo.firebaseio.com/login/users");
+		angular.module("myapp",[])
+			.controller("mycontroller",function($scope) {
+			$scope.username = "";
+			$scope.password = "";
+			$scope.myusers= [{name:"hello",surname:"hi"}]; 
+			$scope.validateCredentials = function(){
+				//myDataRef.push({name:"ramesh",surname:"oswal"});
+				//alert("aya");
+				myDataRef.push({username:$scope.username,password:$scope.password});
+				}
+			});	
+	</script>
+</html>

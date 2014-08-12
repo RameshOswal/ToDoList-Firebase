@@ -1,0 +1,63 @@
+<html>
+	
+	
+
+	<body>
+		Log in page
+		<div ng-app="myapp">
+			<div ng-controller="mycontroller">
+				<form>
+					Username<input type="text" ng-model="username"></input>
+					Password<input type="text" ng-model="password"></input>
+					<input type="button" ng-click="validateCredentials()" value="Log in"></input>
+				</form>
+					<div ng-repeat="users in myusers">
+						<div >
+							<span ng-bind="users.username"></span>
+							<span ng-bind="users.password"></span>
+						</div>
+					</div>
+			</div>
+		</div>
+		<a href="signup.html">Go to Sign up page</a>
+	</body>
+	<script src="angular.min.js" > </script>
+	<script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
+	<script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
+	<script>
+		var myDataRef = new Firebase("https://logintodo.firebaseio.com/login/users");
+		angular.module("myapp",[])
+			.controller("mycontroller",function($scope) {
+			$scope.myusers= [{username:"hello",password:"hi"}]; 
+			$scope.username = "";
+			$scope.password = "";
+			$scope.validateCredentials = function(){
+				//myDataRef.push({name:"ramesh",surname:"oswal"});
+				//alert("aya");
+				myDataRef.once('value',function(data){
+						//alert("sdsd");
+						//alert(data.val());
+						var objects = data.val();
+						//console.log(objects);
+						var x=Object.keys(objects).length;
+						var flag = false;
+						for(var obj in objects){
+							if(objects[obj].username == $scope.username&& objects[obj].password == $scope.password){
+								//alert("u succesfully logged in");
+								flag=true;
+								break;
+							}
+						}
+						if(flag==true){
+								alert("u succesfully logged in");
+								
+							}
+							else{
+								alert("incorrect combination");
+							}
+						$scope.myusers.push( objects[obj]);
+					});
+				}
+			});	
+	</script>
+</html>
