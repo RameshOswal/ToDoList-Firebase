@@ -65,7 +65,7 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 						alert("Plz enter a task to add");
 					else{
 						//alert("pusging task");
-						temp ={taskno : $scope.taskno, todo: $scope.myData.myText, description: $scope.myData.myDescription ,done:false,showeditTB:false,showDescription:false};
+						temp ={taskno : $scope.taskno, todo: $scope.myData.myText, description: $scope.myData.myDescription ,done:false,showeditTB:false,showDescription:false,userid:logintaskservice.getCurrentUserId()};
 						//alert(temp.taskno + "    " + temp.todo);
 						//$scope.myTask.push(temp);
 					}
@@ -108,7 +108,7 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 				};
 				$scope.toggle = function (tasknum){
 					$index = 0;
-					//alert("aya");
+					//alert("aya" + tasknum);
 					for(var i= 0;i<$scope.myTask.length;i++){
 						if($scope.myTask[i].taskno == tasknum){
 							//alert("mila");

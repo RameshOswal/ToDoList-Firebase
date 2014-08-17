@@ -57,10 +57,10 @@
 																	<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
 																</button>	
 															<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
-															<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="toggle(task.taskno)">
+															<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="task.done = !task.done;">
 																<span class="glyphicon glyphicon-ok"></span> Done
 															</button>
-															<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="toggle(task.taskno)" >
+															<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="task.done = !task.done;" >
 																<span class="glyphicon glyphicon-ok"></span> Undo
 															</button>
 															<button type="button" class="btn btn-default btn-lg" ng-click="delTask(task.taskno)">
