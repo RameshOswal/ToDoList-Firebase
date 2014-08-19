@@ -1,87 +1,69 @@
-
-		
-			
-					
-					
-						
-					
-						
-												<div  class="center-block panel panel-danger col-md-7 center-block ">
-									<!-- <ul class="dropdown-menu" role="menu"> 
-										<li role="presentation">
-											<a role="menuitem" tabindex="-1">hello</a>
-										</li>
-									</ul> -->
+<div  class="center-block panel panel-danger col-md-7 center-block ">
+	<span ng-bind="scopemyTaskRef"></span>
+	<h3 class="center-block  panel-heading col-md-3 center-block "> TO DO LIST</h3>
+	<ul class="list-group">
+		<li class="list-group-item">
+			<div class="center-block  col-md-7 center-block ">Enter ur Task here
+				<input type="text" ng-model="myData.myText" placeholder="my task"> </input>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="center-block  col-md-7 center-block ">Enter Taks Description
+				<input type="textarea" ng-model="myData.myDescription" placeholder="Description of task"> </input>
+			</div>
+		</li>
+		<li class="list-group-item">
+			<div class="col-md-7 center-block">
+				<button type="button" class="btn btn-default btn-lg btn-sm" ng-click="addTask()">
+								<span class="glyphicon glyphicon-plus"></span> ADD TASK
+				</button>
+			</div>
+		</li>
+		Your Task Heading:
+		<span ng-bind="myData.myText"> {{myData.myText}}</span>										
+	</ul>
+		<ul class="list-group">
+			<div ng-repeat="task in myTask " ng-if="task.todo!='';"> <!--ng-bind="task.x"-->
+				<li class="list-group-item">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<a >
+								<span ng-if="!task.showDescription" class="glyphicon glyphicon-plus" ng-click="task.showDescription = !task.showDescription;"></span> 
+								<span ng-if="task.showDescription" class="glyphicon glyphicon-minus" ng-click="task.showDescription = !task.showDescription;"></span> 
+							</a>
+								<del ng-if="task.done" > {{task.taskno}}   {{ task.todo}} </del>
+								<span ng-if="!task.done"> {{task.taskno}}   {{ task.todo}} </span>	
 									
-										<h3 class="center-block  panel-heading col-md-3 center-block "> TO DO LIST</h3>
-									<ul class="list-group">
-										<li class="list-group-item">
-										<div class="center-block  col-md-7 center-block ">Enter ur Task here
-											<input type="text" ng-model="myData.myText" placeholder="my task"> </input>
-										</div>
-										</li>
-										<li class="list-group-item">
-										<div class="center-block  col-md-7 center-block ">Enter Taks Description
-											<input type="textarea" ng-model="myData.myDescription" placeholder="Description of task"> </input>
-										</div>
-										</li>
-										<li class="list-group-item">
-											<div class="col-md-7 center-block">
-												<button type="button" class="btn btn-default btn-lg btn-sm" ng-click="addTask()">
-																<span class="glyphicon glyphicon-plus"></span> ADD TASK
-												</button>
-											</div>
-										</li>
-										Your Task Heading:
-										<span ng-bind="myData.myText"> {{myData.myText}}</span>
+									<span class="bt-group btn-group-sm navbar-right" >
 										
-									</ul>
-									<ul class="list-group">
-										
-										<div ng-repeat="task in myTask " ng-if="task.todo!='';"> <!--ng-bind="task.x"-->
+										<button type="button" class="btn  btn-default dropdown-toggle btn-lg " data-toggle="dropdown"
+										 ng-click="editTask(task.taskno)"> 
+											<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
+										</button>	
+										<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
+										<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="task.done = !task.done;">
+											<span class="glyphicon glyphicon-ok"></span> Done
+										</button>
+										<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="task.done = !task.done;" >
+											<span class="glyphicon glyphicon-ok"></span> Undo
+										</button>
+										<button type="button" class="btn btn-default btn-lg" ng-click="delTask(task.taskno)">
+												<span class="glyphicon glyphicon-trash"></span> delete
+										</button>										
+									</span>
+						</div>
+						<div class="panel-body" ng-if="task.showDescription" >
+							<p>
+								{{task.description}}
+							</p>
+						</div>
 											
-											<li class="list-group-item">
-												<div class="panel panel-info">
-													<div class="panel-heading">
-														<a >
-														<span ng-if="!task.showDescription" class="glyphicon glyphicon-plus" ng-click="task.showDescription = !task.showDescription;"></span> 
-														<span ng-if="task.showDescription" class="glyphicon glyphicon-minus" ng-click="task.showDescription = !task.showDescription;"></span> 
-														</a>
-														<!-- need to find another way to do this line -->
-														<del ng-if="task.done" > {{task.taskno}}   {{ task.todo}} </del>
-														<span ng-if="!task.done"> {{task.taskno}}   {{ task.todo}} </span>
-														
-														<span class="bt-group btn-group-sm navbar-right" >
-																<button type="button" class="btn  btn-default dropdown-toggle btn-lg " data-toggle="dropdown"
-																 ng-click="editTask(task.taskno)"> 
-																	<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
-																</button>	
-															<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
-															<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="task.done = !task.done;">
-																<span class="glyphicon glyphicon-ok"></span> Done
-															</button>
-															<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="task.done = !task.done;" >
-																<span class="glyphicon glyphicon-ok"></span> Undo
-															</button>
-															<button type="button" class="btn btn-default btn-lg" ng-click="delTask(task.taskno)">
-																
-																	<span class="glyphicon glyphicon-trash"></span> delete
-																
-															</button>										
-														</span>
-													</div>
-													<div class="panel-body" ng-if="task.showDescription" >
-														<p>
-															{{task.description}}
-														</p>
-													</div>
-											
-												</div>
-											</li>
-										</div>
-										
-								</ul>
-								</div>
+					</div>
+				</li>
+			</div>
+								
+		</ul>
+</div>
 						
 					
 		

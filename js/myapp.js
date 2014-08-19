@@ -37,17 +37,17 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 				$scope.totalTaskDisplayed = 0;
 				
 				//
-				alert("inside task controller " +logintaskservice.getCurrentUserId());
+				
+				var myTaskIndex = myTaskRef.child(logintaskservice.getCurrentUserId());
 				//alert(data.val().count);
 				//
 				//$scope.myTask.push({taskno :$scope.taskno, todo : "item1", description:"my desc",done:false ,showeditTB:false,showDescription:false});
 				$scope.refreshTaskList = function(){
-						myTaskRef.once('value',function(data){
+						myTaskIndex.once('value',function(data){
 						//$scope.totalTaskDisplayed=Object.keys(data.val()).length-2;
 						//alert("totask dislpla is " +$scope.totalTaskDisplayed );//limit to is not working
 						$scope.mytempTask = data.val();
 						for( var task in $scope.mytempTask)
-							if($scope.mytempTask[task].userid == logintaskservice.getCurrentUserId())
 								$scope.myTask.push($scope.mytempTask[task]);
 						//alert($scope.myTask.length);
 						//$scope.mydataval = data.val();
@@ -68,12 +68,14 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 						temp ={taskno : $scope.taskno, todo: $scope.myData.myText, description: $scope.myData.myDescription ,done:false,showeditTB:false,showDescription:false,userid:logintaskservice.getCurrentUserId()};
 						//alert(temp.taskno + "    " + temp.todo);
 						//$scope.myTask.push(temp);
+						myTaskIndex.push(temp);
+						//var userindex = tempname.name();
+						$scope.taskno++;	
+						$scope.myData.myText = "";
+						$scope.myData.myDescription = "";
+						$scope.refreshTaskList();
 					}
-					$scope.taskno++;	
-					myTaskRef.push(temp);
-					$scope.myData.myText = "";
-					$scope.myData.myDescription = "";
-					$scope.refreshTaskList();
+					
 				};
 				
 				$scope.editTask = function(tasknum){
@@ -157,8 +159,8 @@ myapp.controller("logincontroller",function($scope,$location,logintaskservice) {
 						for(var obj in objects){
 							if(objects[obj].username == $scope.username&& objects[obj].password == $scope.password){
 								//alert("u succesfully logged in");
-								logintaskservice.setCurrentUserId(objects[obj].userid);
-								alert(logintaskservice.getCurrentUserId());
+								logintaskservice.setCurrentUserId(obj);
+								//alert(logintaskservice.getCurrentUserId());
 								
 								flag=true;
 								break;

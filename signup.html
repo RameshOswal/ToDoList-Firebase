@@ -23,6 +23,7 @@
 	<script src="https://cdn.firebase.com/js/simple-login/1.6.2/firebase-simple-login.js"></script>
 	<script>
 		var myDataRef = new Firebase("https://logintodo.firebaseio.com/login/users");
+		var myTaskRef = new Firebase("https://logintodo.firebaseio.com/login/tasks");
 		angular.module("myapp",[])
 			.controller("mycontroller",function($scope) {
 			$scope.username = "";
@@ -31,7 +32,12 @@
 			$scope.validateCredentials = function(){
 				//myDataRef.push({name:"ramesh",surname:"oswal"});
 				//alert("aya");
-				myDataRef.push({username:$scope.username,password:$scope.password});
+				var userindex = myDataRef.push({username:$scope.username,password:$scope.password});
+				//so now i have the index name of user in userindex
+				userindex = userindex.name();
+				var temp ={taskno : 1, todo: "temporary task", description: ""  ,done:false,showeditTB:false,showDescription:false};
+				var temptask = myTaskRef.child(userindex);
+				temptask.push(temp);
 				}
 			});	
 	</script>
