@@ -35,13 +35,12 @@
 								<span ng-if="!task.done"> {{task.taskno}}   {{ task.todo}} </span>	
 									
 									<span class="bt-group btn-group-sm navbar-right" >
-										
 										<button type="button" class="btn  btn-default dropdown-toggle btn-lg " data-toggle="dropdown"
 										 ng-click="editTask(task.taskno)"> 
 											<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
 										</button>	
 										<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
-										<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="task.done = !task.done;">
+										<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="Done(task.taskno)">
 											<span class="glyphicon glyphicon-ok"></span> Done
 										</button>
 										<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="task.done = !task.done;" >

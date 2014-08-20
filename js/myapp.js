@@ -44,13 +44,11 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 				//$scope.myTask.push({taskno :$scope.taskno, todo : "item1", description:"my desc",done:false ,showeditTB:false,showDescription:false});
 				$scope.refreshTaskList = function(){
 						myTaskIndex.once('value',function(data){
-						//$scope.totalTaskDisplayed=Object.keys(data.val()).length-2;
-						//alert("totask dislpla is " +$scope.totalTaskDisplayed );//limit to is not working
-						$scope.mytempTask = data.val();
-						for( var task in $scope.mytempTask)
-								$scope.myTask.push($scope.mytempTask[task]);
-						//alert($scope.myTask.length);
-						//$scope.mydataval = data.val();
+						
+						$scope.myTask = data.val();
+						//for( var task in $scope.mytempTask)
+						//		$scope.myTask.push($scope.mytempTask[task]);
+						
 					});
 				
 				};
@@ -95,18 +93,22 @@ myapp.controller("taskcontroller",function($scope,logintaskservice){
 					//alert("aya");
 					//$scope.myTask.splice($index,1);
 				};
-				$scope.isDone = function (tasknum){
+				$scope.Done = function (tasknum){
 					$index = 0;
 					//alert("aya");
-					for(var i= 0;i<$scope.myTask.length;i++){
-						if($scope.myTask[i].taskno == tasknum){
+					for(var task in $scope.myTask){
+						//alert(task);
+						if($scope.myTask[task].taskno == tasknum){
 							//alert("mila");
 							break;
 						}//if
 						$index++;
 					}//foreach
-					return $scope.myTask[$index].done ;
-					
+					//alert($scope.myTask[task].done);
+					$scope.myTask[task].done = !$scope.myTask[task].done;
+					alert($scope.myTask[task].done);
+					myTaskIndex.child(task).update({done:$scope.myTask[task].done});
+					//myTaskIndex.child
 				};
 				$scope.toggle = function (tasknum){
 					$index = 0;
