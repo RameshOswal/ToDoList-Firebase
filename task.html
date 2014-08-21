@@ -17,50 +17,78 @@
 				<button type="button" class="btn btn-default btn-lg btn-sm" ng-click="addTask()">
 								<span class="glyphicon glyphicon-plus"></span> ADD TASK
 				</button>
+				<button type="button" class="btn btn-default btn-lg btn-sm" ng-click="">
+								<span class="glyphicon glyphicon-send"></span> Assign Task
+				</button>
 			</div>
 		</li>
 		Your Task Heading:
 		<span ng-bind="myData.myText"> {{myData.myText}}</span>										
 	</ul>
 		<ul class="list-group">
-			<div ng-repeat="task in myTask " ng-if="task.todo!='';"> <!--ng-bind="task.x"-->
-				<li class="list-group-item">
-					<div class="panel panel-info">
-						<div class="panel-heading">
-							<a >
-								<span ng-if="!task.showDescription" class="glyphicon glyphicon-plus" ng-click="task.showDescription = !task.showDescription;"></span> 
-								<span ng-if="task.showDescription" class="glyphicon glyphicon-minus" ng-click="task.showDescription = !task.showDescription;"></span> 
-							</a>
-								<del ng-if="task.done" > {{task.taskno}}   {{ task.todo}} </del>
-								<span ng-if="!task.done"> {{task.taskno}}   {{ task.todo}} </span>	
-									
-									<span class="bt-group btn-group-sm navbar-right" >
-										<button type="button" class="btn  btn-default dropdown-toggle btn-lg " data-toggle="dropdown"
-										 ng-click="editTask(task.taskno)"> 
-											<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
-										</button>	
-										<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
-										<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="Done(task.taskno)">
-											<span class="glyphicon glyphicon-ok"></span> Done
-										</button>
-										<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="task.done = !task.done;" >
-											<span class="glyphicon glyphicon-ok"></span> Undo
-										</button>
-										<button type="button" class="btn btn-default btn-lg" ng-click="delTask(task.taskno)">
-												<span class="glyphicon glyphicon-trash"></span> delete
-										</button>										
-									</span>
-						</div>
-						<div class="panel-body" ng-if="task.showDescription" >
-							<p>
-								{{task.description}}
-							</p>
-						</div>
-											
-					</div>
-				</li>
-			</div>
-								
+			<table class="table">
+				<tr>
+					<td>
+						<div ng-repeat="task in myTask " ng-if="task.todo!='';"> <!--ng-bind="task.x"-->
+								<li class="list-group-item">
+									<div class="panel panel-info">
+										<div class="panel-heading">
+											<a >
+												<span ng-if="!task.showDescription" class="glyphicon glyphicon-plus" ng-click="task.showDescription = !task.showDescription;"></span> 
+												<span ng-if="task.showDescription" class="glyphicon glyphicon-minus" ng-click="task.showDescription = !task.showDescription;"></span> 
+											</a>
+												<del ng-if="task.done" > {{task.taskno}}   {{ task.todo}} </del>
+												<span ng-if="!task.done"> {{task.taskno}}   {{ task.todo}} </span>	
+													
+													<span class="bt-group btn-group-sm navbar-right" >
+														<button type="button" class="btn  btn-default dropdown-toggle btn-lg " data-toggle="dropdown"
+														 ng-click="editTask(task.taskno)"> 
+															<span class="glyphicon glyphicon-pencil"></span> edit <span class="caret" > </span>
+														</button>	
+														<input type="text"  ng-if="task.showeditTB"  ng-model="task.todo"></input>
+														<button type="button" class="btn btn-default btn-lg" ng-if="!task.done" ng-click="Done(task.taskno)">
+															<span class="glyphicon glyphicon-ok"></span> Done
+														</button>
+														<button type="button" class="btn btn-default btn-lg" ng-if="task.done" ng-click="Done(task.taskno)" >
+															<span class="glyphicon glyphicon-ok"></span> Undo
+														</button>
+														<button type="button" class="btn btn-default btn-lg" ng-click="delTask(task.taskno)">
+																<span class="glyphicon glyphicon-trash"></span> delete
+														</button>										
+													</span>
+										</div>
+										<div class="panel-body" ng-if="task.showDescription" >
+											<p>
+												{{task.description}}
+											</p>
+										</div>
+															
+									</div>
+								</li>
+							</div>
+							
+					</td>
+					<td> 
+						<table class="table table-striped">
+							<tr>
+								<td>
+									hello
+								</td>
+							</tr>
+							<tr>
+								<td>
+									hello
+								</td>
+							</tr>
+							<tr>
+								<td>
+									hello
+								</td>
+							</tr>
+						</table>	
+					</td>
+				</tr>	
+			</table>					
 		</ul>
 </div>
 						
